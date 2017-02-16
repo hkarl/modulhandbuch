@@ -486,10 +486,26 @@ class Modul(ExaminedEntity):
         return alle
 
     def pruefungsMinuten(self):
-        return {'klausurMin': 0,
-                'klausurMax': 999,
-                'oralMin': 0,
-                'oralMax': 999}
+
+        kl = 0
+        oral = 0
+
+        if self.lps <= 5:
+            kl = 90
+            oral = 25
+        elif self.lps == 6:
+            kl = 120
+            oral = 40
+        else:
+            kl = 180
+            oral = 50
+
+        return {'klausurMin': kl,
+                'klausurMax': kl,
+                'oralMin': oral,
+                'oralMax': oral}
+
+
 
     # TODO: If it stays a responsible entity, then we need methods
     # to ask for the SWS both here and in SWSEntity, for uniform access
