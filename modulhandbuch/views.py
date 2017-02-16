@@ -102,8 +102,16 @@ class PruefungsformView(SimpleListView):
     model = models.Pruefungsform
 
 
+class QualTeilView(SimpleListView):
+    model = models.QualTeilnahme
+
+
 class StudiengangView(SimpleListView):
     model = models.Studiengang
+
+
+class StudienleistungView(SimpleListView):
+    model = models.Studienleistung
 
 
 class FocusAreaView(SimpleListView):
@@ -239,6 +247,14 @@ class NichtfachlicheKompetenzDetailView(SimpleDetailView):
 
 class PruefungsformDetailView(SimpleDetailView):
     model = models.Pruefungsform
+
+
+class StudienleistungDetailView(SimpleDetailView):
+    model = models.Studienleistung
+
+
+class QualTeilDetailView(SimpleDetailView):
+    model = models.QualTeilnahme
 
 
 class TexDateienDetailView(SimpleDetailView):

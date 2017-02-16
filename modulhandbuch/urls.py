@@ -142,12 +142,26 @@ urlpatterns = [
         active_and_login_required(views.PruefungsformDetailView.as_view()),
         name="pruefungsformDetail"),
 
+    url(r'/qualteilnahme$',
+        active_and_login_required(views.QualTeilView.as_view()),
+        name="qualteilList"),
+    url(r'/qualteilnahme/(?P<pk>[0-9]+)$',
+        active_and_login_required(views.QualTeilDetailView.as_view()),
+        name="qualteilDetail"),
+
     url(r'/studiengang$',
         active_and_login_required(views.StudiengangView.as_view()),
         name="studiengangList"),
     url(r'/studiengang/(?P<pk>[0-9]+)$',
         active_and_login_required(views.StudiengangDetailView.as_view()),
         name="studiengangDetail"),
+
+    url(r'/studienleistung$',
+        active_and_login_required(views.StudienleistungView.as_view()),
+        name="studienleistungList"),
+    url(r'/studienleistung/(?P<pk>[0-9]+)$',
+        active_and_login_required(views.StudienleistungDetailView.as_view()),
+        name="studienleistungDetail"),
 
     url(r'/focusarea$',
         active_and_login_required(views.FocusAreaView.as_view()),
