@@ -189,16 +189,51 @@ class OwnedInline(admin.TabularInline):
     pass
 
 
+### experimental code, try to fix/cricumvent odd behavior of select2_modelform in ModulLVInline
+
+
+from django import forms
+import easy_select2
+from django.forms.widgets import Textarea, RadioSelect
+
+
+class VeranstalungInlineForm(forms.ModelForm):
+
+    class Meta:
+        model = VeranstaltungsLps
+        fields = ['veranstaltung', 'lp', ]
+        labels = {'veranstaltung': "Unsere Veranstaltungen"}
+
+from django.forms.models import inlineformset_factory
+VeranstaltungInlineFormSet = inlineformset_factory(
+    Modul, VeranstaltungsLps,
+    fk_name="modul",
+    fields = ['veranstaltung', 'lp', ],
+    # widgets = {'veranstaltung': easy_select2.widgets.Select2(),
+    #            'lp': Textarea()},
+    widgets={'veranstaltung': RadioSelect}
+    # form=VeranstalungInlineForm,
+)
+
+
 class ModulLVInline(OwnedInline):
     model = VeranstaltungsLps
     # TODO: select2_modelform zeigt alle möglichen keys an,
     # in einem ersten select field, das gart nicht angezeigt
     # werden sollte. Das ist ein killer bug :-(
 
-    # form = select2_modelform(VeranstaltungsLps, attrs={'width': '250px'})
     fk_name = "modul"
+    
+    # Option 1: directly call select2_modelform: 
+    # form = select2_modelform(VeranstaltungsLps, attrs={'width': '250px'})
+    # fields = ['veranstaltung', 'lp', ]
+    # readonly_fields = ['modul']
+
+    # Option 2: own formset:
+    formset = VeranstaltungInlineFormSet
     fields = ['veranstaltung', 'lp', ]
-    readonly_fields = ['modul']
+    
+    # standard config: 
     verbose_name = "Lehrveranstaltung (und LP) in diesem Modul"
     verbose_name_plural = "Lehrveranstaltungen (und LPs) in diesem Modul"
 
@@ -292,6 +327,16 @@ class PruefungsformAdmin(OwnedAdmin):
     form = select2_modelform(Pruefungsform, attrs={'width': '250px'})
 
 
+class StudienleistungAdmin(OwnedAdmin):
+    model = Studienleistung
+    form = select2_modelform(Studienleistung, attrs={'width': '250px'})
+
+
+class QualTeilnahmeAdmin(OwnedAdmin):
+    model = QualTeilnahme
+    form = select2_modelform(QualTeilnahme, attrs={'width': '250px'})
+
+
 class OrganisationsformAdmin(OwnedAdmin):
     model = Organisationsform
     form = select2_modelform(Organisationsform, attrs={'width': '250px'})
@@ -312,6 +357,8 @@ admin.site.register(Lehreinheit, LehreinheitAdmin)
 admin.site.register(Fachgebiet, FachgebietAdmin)
 admin.site.register(Lehrender, LehrenderAdmin)
 admin.site.register(Pruefungsform, PruefungsformAdmin)
+admin.site.register(Studienleistung, StudienleistungAdmin)
+admin.site.register(QualTeilnahme, QualTeilnahmeAdmin)
 admin.site.register(Organisationsform, OrganisationsformAdmin)
 admin.site.register(NichtfachlicheKompetenz, NichtfachlicheKompetenzAdmin)
 admin.site.register(Lehrveranstaltung, LehrveranstaltungAdmin)

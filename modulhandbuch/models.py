@@ -126,6 +126,14 @@ class ExaminedEntity(ResponsibleEntity):
                                  verbose_name=u"Prüfungsform",
                                  help_text=u"Prüfungsform; ggf. neu anlegen.")
 
+    # klausurdauer = models.PositiveIntegerField(default=0,
+    #                                            verbose_name=u"Klausurdauer",
+    #                                            help_text="Dauer der Klausur (in Minuten)")
+    #
+    # muendlichedauer = models.PositiveIntegerField(default=0,
+    #                                            verbose_name=u"Dauer einer mündlichen Prüfung",
+    #                                            help_text="Dauer einer mündlichen Prüfung (in Minuten)")
+
     class Meta:
         abstract = True
 
@@ -208,6 +216,24 @@ class Pruefungsform(DescribedEntity):
     class Meta:
         verbose_name = u"Prüfungsform"
         verbose_name_plural = u"Prüfungsformen"
+        ordering = ["nameDe", ]
+
+
+class Studienleistung(DescribedEntity):
+    display_fields = ['nameDe', 'nameEn', 'beschreibungDe', 'beschreibungEn', 'editors']
+
+    class Meta:
+        verbose_name = u"Studienleistung"
+        verbose_name_plural = u"Studienleistungen"
+        ordering = ["nameDe", ]
+
+
+class QualTeilnahme(DescribedEntity):
+    display_fields = ['nameDe', 'nameEn', 'beschreibungDe', 'beschreibungEn', 'editors']
+
+    class Meta:
+        verbose_name = u"Qualifizierte Teilnahme"
+        verbose_name_plural = u"Qualifizierte Teilnahmen"
         ordering = ["nameDe", ]
 
 
@@ -318,6 +344,14 @@ class Lehrveranstaltung(SWSEntity):
                                   verbose_name="Material (engl.)",
                                   help_text=u"Materialien für die Vorlesung (englische Beschreibung)")
 
+    voraussetzungenDe = models.TextField(blank=True,
+                                  verbose_name="Voraussetzungen",
+                                  help_text=u"Formale Voraussetzungen für die Teilnahme")
+
+    voraussetzungenEn = models.TextField(blank=True,
+                                  verbose_name="Voraussetzungen (engl.)",
+                                  help_text=u"Formale Voraussetzungen für die Teilnahme (englische Beschreibung)")
+
     nfk = models.ManyToManyField(
         NichtfachlicheKompetenz,
         verbose_name="Nichtfachliche Kompetenz",
@@ -425,7 +459,37 @@ class Modul(ExaminedEntity):
 
     anzahlLvs = models.IntegerField(default=0,
                                     verbose_name="Anzahl Lehrveranstaltungen",
-                                    help_text=u"Wie viele Lehrveranstaltungen müssen in diesem Modul belegt werden in diesem Modul? Zur Berechung des Arbeitsaufwandes notwendig.")
+                                    help_text=u"Wie viele Lehrveranstaltungen müssen in diesem Modul belegt werden? "
+                                              "Zur Berechung des Arbeitsaufwandes notwendig.")
+
+    studienleistung = models.ForeignKey(Studienleistung,
+                                        verbose_name=u"Studienleistung",
+                                        help_text=u"Gibt es eine Studienleistung für dieses Modul?",
+                                        blank=True, null=True)
+
+    qualteilnahme = models.ForeignKey(QualTeilnahme,
+                                      verbose_name=u"Qualifizierte Teilnahme",
+                                      help_text=u"Gibt es eine qualfizierte Teilnahme für dieses Modul?",
+                                      blank=True, null=True)
+
+    andereStudiengaengeText = models.TextField(blank=True,
+                                           verbose_name=u"Verwendung des Moduls in anderen Studiengängen",
+                                           help_text=u"Benennen Sie die Studiengänge, in denen dieses Modul noch benutzt wird. "
+                                               u"Nutzen Sie dieses Feld für Studiengänge, die noch nicht "
+                                               u"in dieser Anwendung erfasst sind und nicht automatisch "
+                                               u"identifiziert werden.")
+
+    def andereStudiengaenge(self, studiengang=None):
+        alle = self.studiengang_set.all()
+        if studiengang:
+            alle = [x for x in alle if not x == studiengang]
+        return alle
+
+    def pruefungsMinuten(self):
+        return {'klausurMin': 0,
+                'klausurMax': 999,
+                'oralMin': 0,
+                'oralMax': 999}
 
     # TODO: If it stays a responsible entity, then we need methods
     # to ask for the SWS both here and in SWSEntity, for uniform access
