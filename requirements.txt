@@ -1,0 +1,36 @@
+Django==1.8.2
+Jinja2==2.7.3
+MarkupSafe==0.23
+Pygments==2.0.2
+Werkzeug==0.10.4
+argparse==1.2.1
+blessings==1.6
+bpython==0.14.2
+curtsies==0.1.19
+distribute==0.6.24
+django-admin-bootstrapped==2.5.1
+django-auth-kerberos==1.2.4
+django-auth-krb==0.1.1
+django-autoslug==1.8.0
+django-bootstrap-themes==3.1.2
+django-bootstrap3==5.4.0
+django-crispy-forms==1.4.0
+django-easy-select2==1.2.12
+django-extensions==1.5.5
+django-registration==1.0
+django-tables2==1.0.4
+getent==0.2
+greenlet==0.4.7
+kerberos==1.1.1
+lxml==2.3.2
+# mercurial==2.2.2
+psycopg2==2.4.5
+pykerberos
+# python-apt==0.8.8.2
+requests==2.7.0
+six==1.9.0
+# uWSGI
+# unattended-upgrades==0.1
+virtualenv==1.7.1.2
+virtualenvwrapper==3.4
+wsgiref==0.1.2
