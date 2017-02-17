@@ -361,22 +361,22 @@ class Lehrveranstaltung(SWSEntity):
 
     teilnehmerVL = models.PositiveIntegerField(default=0,
                                                blank=True, null=True,
-                                               verbose_name="Teilnehmerzahl LV/VL",
-                                               help_text="Von Verwaltung geforderte Angabe zur Teilnehmerzahl "
-                                               "für Veranstaltung (typischerweise: Vorlesung) an sich. "
-                                               "Angeblich wegen Kapazitätsverordnung; Relevanz unklar; "
-                                               "Datengrundlage unklar; Verwendung unklar; Vereinheitlichung unklar. "
-                                               "Im Zweifel Fantasiezahl eintragen.")
+                                               verbose_name=u"Teilnehmerzahl LV/VL",
+                                               help_text=u"Von Verwaltung geforderte Angabe zur Teilnehmerzahl "
+                                               u"für Veranstaltung (typischerweise: Vorlesung) an sich. "
+                                               u"Angeblich wegen Kapazitätsverordnung; Relevanz unklar; "
+                                               u"Datengrundlage unklar; Verwendung unklar; Vereinheitlichung unklar. "
+                                               u"Im Zweifel Fantasiezahl eintragen.")
 
     teilnehmerUE = models.PositiveIntegerField(default=0,
                                                blank=True, null=True,
                                                verbose_name="Teilnehmerzahl LV/VL",
-                                               help_text="Von Verwaltung geforderte Angabe zur Teilnehmerzahl "
-                                                         "für der Veranstaltung zugeordnete ÜbungsGRUPPE. "
-                                                         "(Nicht: Anzahl der Gruppen!) "
-                                                         "Angeblich wegen Kapazitätsverordnung; Relevanz unklar; "
-                                                         "Datengrundlage unklar; Verwendung unklar; Vereinheitlichung unklar. "
-                                                         "Im Zweifel Fantasiezahl eintragen.")
+                                               help_text=u"Von Verwaltung geforderte Angabe zur Teilnehmerzahl "
+                                                         u"für der Veranstaltung zugeordnete ÜbungsGRUPPE. "
+                                                         u"(Nicht: Anzahl der Gruppen!) "
+                                                         u"Angeblich wegen Kapazitätsverordnung; Relevanz unklar; "
+                                                         u"Datengrundlage unklar; Verwendung unklar; Vereinheitlichung unklar. "
+                                                         u"Im Zweifel Fantasiezahl eintragen.")
 
     def nfk_list(self):
         return self.nfk.all()
