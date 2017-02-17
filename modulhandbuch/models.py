@@ -359,6 +359,25 @@ class Lehrveranstaltung(SWSEntity):
         blank=True,
     )
 
+    teilnehmerVL = models.PositiveIntegerField(default=0,
+                                               blank=True, null=True,
+                                               verbose_name="Teilnehmerzahl LV/VL",
+                                               help_text="Von Verwaltung geforderte Angabe zur Teilnehmerzahl "
+                                               "für Veranstaltung (typischerweise: Vorlesung) an sich. "
+                                               "Angeblich wegen Kapazitätsverordnung; Relevanz unklar; "
+                                               "Datengrundlage unklar; Verwendung unklar; Vereinheitlichung unklar. "
+                                               "Im Zweifel Fantasiezahl eintragen.")
+
+    teilnehmerUE = models.PositiveIntegerField(default=0,
+                                               blank=True, null=True,
+                                               verbose_name="Teilnehmerzahl LV/VL",
+                                               help_text="Von Verwaltung geforderte Angabe zur Teilnehmerzahl "
+                                                         "für der Veranstaltung zugeordnete ÜbungsGRUPPE. "
+                                                         "(Nicht: Anzahl der Gruppen!) "
+                                                         "Angeblich wegen Kapazitätsverordnung; Relevanz unklar; "
+                                                         "Datengrundlage unklar; Verwendung unklar; Vereinheitlichung unklar. "
+                                                         "Im Zweifel Fantasiezahl eintragen.")
+
     def nfk_list(self):
         return self.nfk.all()
 
