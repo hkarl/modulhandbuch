@@ -149,6 +149,13 @@ urlpatterns = [
         active_and_login_required(views.QualTeilDetailView.as_view()),
         name="qualteilnahmeDetail"),
 
+    url(r'/modulteilpruefung',
+        active_and_login_required(views.QualTeilView.as_view()),
+        name="modulteilpruefungList"),
+    url(r'/qualteilnahme/(?P<pk>[0-9]+)$',
+        active_and_login_required(views.QualTeilDetailView.as_view()),
+        name="modulteilpruefungDetail"),
+
     url(r'/studiengang$',
         active_and_login_required(views.StudiengangView.as_view()),
         name="studiengangList"),

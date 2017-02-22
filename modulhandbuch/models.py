@@ -219,6 +219,15 @@ class Pruefungsform(DescribedEntity):
         ordering = ["nameDe", ]
 
 
+class Modulteilpruefungen(DescribedEntity):
+    display_fields = ['nameDe', 'nameEn', 'beschreibungDe', 'beschreibungEn', 'editors']
+
+    class Meta:
+        verbose_name = u"Modulteilprüfungsform"
+        verbose_name_plural = u"Modulteilprüfungsformen"
+        ordering = ["nameDe", ]
+
+
 class Studienleistung(DescribedEntity):
     display_fields = ['nameDe', 'nameEn', 'beschreibungDe', 'beschreibungEn', 'editors']
 
@@ -497,6 +506,19 @@ class Modul(ExaminedEntity):
                                                u"Nutzen Sie dieses Feld für Studiengänge, die noch nicht "
                                                u"in dieser Anwendung erfasst sind und nicht automatisch "
                                                u"identifiziert werden.")
+
+    wahlmoeglichkeitenDe = models.TextField(blank=True,
+                                            verbose_name=u"Wahlmöglichkeiten innerhalb eines Moduls (de)")
+
+    wahlmoeglichkeitenEn = models.TextField(blank=True,
+                                            verbose_name=u"Wahlmöglichkeiten innerhalb eines Moduls (en)")
+
+    modulteilpruefunen = models.ForeignKey(Modulteilpruefungen,
+                                           blank=True, null=True,
+                                           verbose_name=u"Modulteilprüfungsformen",
+                                           help_text="Wählen Sie der Liste eine evtl. erlaubte oder "
+                                           "durchgeführte Teilprüfungsform aus.")
+
 
     def andereStudiengaenge(self, studiengang=None):
         alle = self.studiengang_set.all()

@@ -327,6 +327,11 @@ class PruefungsformAdmin(OwnedAdmin):
     form = select2_modelform(Pruefungsform, attrs={'width': '250px'})
 
 
+class ModulteilpruefungenAdmin(OwnedAdmin):
+    model = Modulteilpruefungen
+    form = select2_modelform(Modulteilpruefungen, attrs={'width': '250px'})
+
+
 class StudienleistungAdmin(OwnedAdmin):
     model = Studienleistung
     form = select2_modelform(Studienleistung, attrs={'width': '250px'})
