@@ -106,6 +106,11 @@ class QualTeilView(SimpleListView):
     model = models.QualTeilnahme
 
 
+class ModulteilpruefungView(SimpleListView):
+    model = models.Modulteilpruefung
+
+
+
 class StudiengangView(SimpleListView):
     model = models.Studiengang
 
@@ -255,6 +260,10 @@ class StudienleistungDetailView(SimpleDetailView):
 
 class QualTeilDetailView(SimpleDetailView):
     model = models.QualTeilnahme
+
+
+class ModulteilpruefungDetailView(SimpleDetailView):
+    model = models.Modulteilpruefung
 
 
 class TexDateienDetailView(SimpleDetailView):

@@ -219,7 +219,7 @@ class Pruefungsform(DescribedEntity):
         ordering = ["nameDe", ]
 
 
-class Modulteilpruefungen(DescribedEntity):
+class Modulteilpruefung(DescribedEntity):
     display_fields = ['nameDe', 'nameEn', 'beschreibungDe', 'beschreibungEn', 'editors']
 
     class Meta:
@@ -513,11 +513,11 @@ class Modul(ExaminedEntity):
     wahlmoeglichkeitenEn = models.TextField(blank=True,
                                             verbose_name=u"Wahlmöglichkeiten innerhalb eines Moduls (en)")
 
-    modulteilpruefunen = models.ForeignKey(Modulteilpruefungen,
+    modulteilpruefung = models.ForeignKey(Modulteilpruefung,
                                            blank=True, null=True,
                                            verbose_name=u"Modulteilprüfungsformen",
-                                           help_text="Wählen Sie der Liste eine evtl. erlaubte oder "
-                                           "durchgeführte Teilprüfungsform aus.")
+                                           help_text=u"Wählen Sie der Liste eine evtl. erlaubte oder "
+                                           u"durchgeführte Teilprüfungsform aus.")
 
 
     def andereStudiengaenge(self, studiengang=None):

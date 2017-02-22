@@ -150,10 +150,10 @@ urlpatterns = [
         name="qualteilnahmeDetail"),
 
     url(r'/modulteilpruefung',
-        active_and_login_required(views.QualTeilView.as_view()),
+        active_and_login_required(views.ModulteilpruefungView.as_view()),
         name="modulteilpruefungList"),
-    url(r'/qualteilnahme/(?P<pk>[0-9]+)$',
-        active_and_login_required(views.QualTeilDetailView.as_view()),
+    url(r'/modulteilpruefung/(?P<pk>[0-9]+)$',
+        active_and_login_required(views.ModulteilpruefungDetailView.as_view()),
         name="modulteilpruefungDetail"),
 
     url(r'/studiengang$',

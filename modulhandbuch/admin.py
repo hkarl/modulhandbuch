@@ -327,9 +327,9 @@ class PruefungsformAdmin(OwnedAdmin):
     form = select2_modelform(Pruefungsform, attrs={'width': '250px'})
 
 
-class ModulteilpruefungenAdmin(OwnedAdmin):
-    model = Modulteilpruefungen
-    form = select2_modelform(Modulteilpruefungen, attrs={'width': '250px'})
+class ModulteilpruefungAdmin(OwnedAdmin):
+    model = Modulteilpruefung
+    form = select2_modelform(Modulteilpruefung, attrs={'width': '250px'})
 
 
 class StudienleistungAdmin(OwnedAdmin):
@@ -364,6 +364,7 @@ admin.site.register(Lehrender, LehrenderAdmin)
 admin.site.register(Pruefungsform, PruefungsformAdmin)
 admin.site.register(Studienleistung, StudienleistungAdmin)
 admin.site.register(QualTeilnahme, QualTeilnahmeAdmin)
+admin.site.register(Modulteilpruefung, ModulteilpruefungAdmin)
 admin.site.register(Organisationsform, OrganisationsformAdmin)
 admin.site.register(NichtfachlicheKompetenz, NichtfachlicheKompetenzAdmin)
 admin.site.register(Lehrveranstaltung, LehrveranstaltungAdmin)
