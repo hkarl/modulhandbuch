@@ -519,6 +519,20 @@ class Modul(ExaminedEntity):
                                            help_text=u"Wählen Sie der Liste eine evtl. erlaubte oder "
                                            u"durchgeführte Teilprüfungsform aus.")
 
+    gewichtung = models.PositiveIntegerField(default=0,
+                                             blank=True,
+                                             verbose_name="Gewichtung für Gesamtnote",
+                                             help_text="Gewichtung dieses Moduls für die Gesamtnote.")
+
+    voraussetzungenDe = models.TextField(blank=True,
+                                         verbose_name="Voraussetzungen",
+                                         help_text=u"Formale Voraussetzungen für die Teilnahme an MODUL")
+
+
+    voraussetzungenEn = models.TextField(blank=True,
+                                     verbose_name="Voraussetzungen (engl.)",
+                                     help_text=u"Formale Voraussetzungen für die Teilnahme (englische Beschreibung)")
+
 
     def andereStudiengaenge(self, studiengang=None):
         alle = self.studiengang_set.all()
