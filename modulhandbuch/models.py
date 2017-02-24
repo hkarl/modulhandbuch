@@ -521,8 +521,8 @@ class Modul(ExaminedEntity):
 
     gewichtung = models.PositiveIntegerField(default=0,
                                              blank=True,
-                                             verbose_name="Gewichtung für Gesamtnote",
-                                             help_text="Gewichtung dieses Moduls für die Gesamtnote.")
+                                             verbose_name=u"Gewichtung für Gesamtnote",
+                                             help_text=u"Gewichtung dieses Moduls für die Gesamtnote.")
 
     voraussetzungenDe = models.TextField(blank=True,
                                          verbose_name="Voraussetzungen",
