@@ -310,7 +310,7 @@ class Lehrveranstaltung(SWSEntity):
                               verbose_name="Termin",
                               choices=(('WS', 'Wintersemester'),
                                        ('SS', 'Sommersemester'),
-                                       ('NA', 'Nicht bekannt'), ),
+                                       ('WS oder SS', 'Nicht bekannt'), ),
                               default = 'NA',
                               help_text=u"Typischer Durchführungstermin")
     zielsemester = models.IntegerField(default=0,
@@ -542,23 +542,17 @@ class Modul(ExaminedEntity):
 
     def pruefungsMinuten(self):
 
-        kl = 0
-        oral = 0
+        keys = ['klausurMin','klausurMax','oralMin','oralMax']
+        zeiten = [0,0,0,0]
 
         if self.lps <= 5:
-            kl = 90
-            oral = 25
+            zeiten = [60,90,25,25]
         elif self.lps == 6:
-            kl = 120
-            oral = 40
+            zeiten = [90,120,40,40]
         else:
-            kl = 180
-            oral = 50
+            zeiten = [120,180,50,50]
 
-        return {'klausurMin': kl,
-                'klausurMax': kl,
-                'oralMin': oral,
-                'oralMax': oral}
+        return dict(zip(keys,zeiten))
 
 
 
